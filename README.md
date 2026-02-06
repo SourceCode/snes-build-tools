@@ -8,7 +8,7 @@ A production-ready C development environment for Super Nintendo Entertainment Sy
 
 ---
 
-## 📖 Documentation Index
+## Documentation Index
 
 | Doc                                        | Description                                              |
 | :----------------------------------------- | :------------------------------------------------------- |
@@ -23,7 +23,7 @@ A production-ready C development environment for Super Nintendo Entertainment Sy
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 **SNES Build Tools** solves the complexity of setting up a retro-console development environment. Instead of manually hunting down compilers, linkers, and converters, this repository provides:
 
@@ -39,7 +39,7 @@ A production-ready C development environment for Super Nintendo Entertainment Sy
 
 ---
 
-## 🏗 Architecture Summary
+## Architecture Summary
 
 The system follows a standard compilation pipeline modified for the 65c816 CPU:
 
@@ -49,7 +49,7 @@ graph LR
     asm -->|816-opt| opt[Optimized ASM]
     opt -->|wla-65816| obj[Object File]
     png[PNG Assets] -->|gfx4snes| data[Binary Data]
-    obj -->|wlalink| rom[SNES ROM (.sfc)]
+    obj -->|wlalink| rom["SNES ROM (.sfc)"]
     data --> rom
 ```
 
@@ -57,7 +57,7 @@ See [Implementation Docs](docs/implementation.md) for details.
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 - **SDK**: [PVSnesLib v4.5.0](https://github.com/alekmaul/pvsneslib)
 - **Compiler**: `816-tcc` (C99-like syntax)
@@ -68,7 +68,7 @@ See [Implementation Docs](docs/implementation.md) for details.
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 ### 1. Prerequisites
 
@@ -103,7 +103,7 @@ See [First Run Guide](docs/first-run.md) for details.
 
 ---
 
-## 🧪 Testing & Verification
+## Testing & Verification
 
 Testing is primarily performed via emulation.
 
@@ -115,13 +115,13 @@ See [Testing Strategy](docs/testing.md) for emulator recommendations and debuggi
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see [Contributing Guide](docs/contributing.md) for details on pull requests, code style, and architectural decision records.
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
