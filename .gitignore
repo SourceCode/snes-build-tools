@@ -1,0 +1,74 @@
+# ============================================
+# SNES Build Tools - .gitignore
+# ============================================
+
+# --- Build Artifacts ---
+*.o
+*.obj
+*.sfc
+*.smc
+*.sym
+*.brr
+*.pc7
+*.mp7
+
+# Build output directories
+projects/*/build/*
+!projects/*/build/.gitkeep
+
+# PVSnesLib intermediate files (generated during build)
+# These are produced alongside source files by gfx4snes and the assembler
+*.pic
+*.pal
+*.map
+*.til
+
+# WLA assembler/linker intermediates
+*.lib
+*.lst
+
+# --- Downloaded Tools (install script fetches these) ---
+tools/pvsneslib/*
+!tools/pvsneslib/.gitkeep
+tools/emulators/*
+!tools/emulators/.gitkeep
+tools/bin/*
+!tools/bin/.gitkeep
+
+# --- Temporary Files ---
+tmp/*
+!tmp/.gitkeep
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+venv/
+.env
+
+# --- OS Files ---
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+
+# --- IDE / Editor ---
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# --- Emulator Files ---
+*.srm
+*.sav
+*.mss
+*.bst
+*.ips
+*.bps
+
+# --- Logs ---
+*.log
