@@ -1,0 +1,257 @@
+{
+  "$schema": "dependency-manifest-v1",
+  "description": "SNES Build Tools dependency manifest — single source of truth for install scripts",
+  "lastUpdated": "2025-02-06",
+  "dependencies": {
+    "pvsneslib": {
+      "name": "PVSnesLib SDK",
+      "required": true,
+      "version": "4.5.0",
+      "description": "Complete SNES development SDK: C compiler (816-tcc), assembler (wla-65816), linker (wlalink), graphics converter (gfx4snes), and libraries",
+      "license": "MIT",
+      "homepage": "https://github.com/alekmaul/pvsneslib",
+      "platforms": {
+        "windows": {
+          "url": "https://github.com/alekmaul/pvsneslib/releases/download/4.5.0/pvsneslib_450_64b_windows.zip",
+          "archiveType": "zip",
+          "sha256": "22c56150f3e8cb38702d4ad5e565c0b4b685807300d612061d87a7f5aea2a69f",
+          "sizeBytes": 9994749
+        },
+        "linux": {
+          "url": "https://github.com/alekmaul/pvsneslib/releases/download/4.5.0/pvsneslib_450_64b_linux.zip",
+          "archiveType": "zip",
+          "sha256": "b69ff32ada19895b7ebfe02a1e3c08a44c80bd9c8132de05f5c356f86264ce32",
+          "sizeBytes": 11557645
+        },
+        "darwin": {
+          "url": "https://github.com/alekmaul/pvsneslib/releases/download/4.5.0/pvsneslib_450_64b_darwin.zip",
+          "archiveType": "zip",
+          "sha256": "3e971253d90f45e6dbb56426fafd92df5170aab39db2728bc606b3b9491f3d38",
+          "sizeBytes": 6720531
+        }
+      },
+      "extractTo": "tools/pvsneslib",
+      "archiveRootDir": "pvsneslib",
+      "envVars": {
+        "PVSNESLIB_HOME": "{repoRoot}/tools/pvsneslib",
+        "PATH_PREPEND": [
+          "{repoRoot}/tools/pvsneslib/devkitsnes/bin",
+          "{repoRoot}/tools/pvsneslib/devkitsnes/tools"
+        ]
+      },
+      "postInstallNote": "PVSNESLIB_HOME must use Unix-style forward slashes on ALL platforms (e.g. /c/snesdev not c:\\snesdev). The snes_rules Makefile enforces this.",
+      "verify": [
+        {
+          "description": "C compiler (816-tcc)",
+          "command": {
+            "windows": "tools\\pvsneslib\\devkitsnes\\bin\\816-tcc.exe --version",
+            "linux": "tools/pvsneslib/devkitsnes/bin/816-tcc --version",
+            "darwin": "tools/pvsneslib/devkitsnes/bin/816-tcc --version"
+          },
+          "expectOutput": "tcc"
+        },
+        {
+          "description": "Assembler (wla-65816)",
+          "command": {
+            "windows": "tools\\pvsneslib\\devkitsnes\\bin\\wla-65816.exe -v",
+            "linux": "tools/pvsneslib/devkitsnes/bin/wla-65816 -v",
+            "darwin": "tools/pvsneslib/devkitsnes/bin/wla-65816 -v"
+          },
+          "expectOutput": "WLA"
+        },
+        {
+          "description": "Linker (wlalink)",
+          "command": {
+            "windows": "tools\\pvsneslib\\devkitsnes\\bin\\wlalink.exe",
+            "linux": "tools/pvsneslib/devkitsnes/bin/wlalink",
+            "darwin": "tools/pvsneslib/devkitsnes/bin/wlalink"
+          },
+          "expectOutput": "WLALINK"
+        },
+        {
+          "description": "Graphics converter (gfx4snes)",
+          "command": {
+            "windows": "tools\\pvsneslib\\devkitsnes\\tools\\gfx4snes.exe",
+            "linux": "tools/pvsneslib/devkitsnes/tools/gfx4snes",
+            "darwin": "tools/pvsneslib/devkitsnes/tools/gfx4snes"
+          },
+          "expectOutput": "gfx4snes"
+        },
+        {
+          "description": "Build rules file exists",
+          "fileExists": "tools/pvsneslib/devkitsnes/snes_rules"
+        },
+        {
+          "description": "SNES main header exists",
+          "fileExists": "tools/pvsneslib/pvsneslib/include/snes/video.h"
+        }
+      ],
+      "provides": {
+        "compilers": [
+          {"name": "816-tcc", "path": "devkitsnes/bin/816-tcc", "purpose": "C to 65816 ASM compiler"},
+          {"name": "wla-65816", "path": "devkitsnes/bin/wla-65816", "purpose": "65816 assembler"},
+          {"name": "wla-spc700", "path": "devkitsnes/bin/wla-spc700", "purpose": "SPC700 sound assembler"},
+          {"name": "wlalink", "path": "devkitsnes/bin/wlalink", "purpose": "Linker (OBJ to ROM)"}
+        ],
+        "tools": [
+          {"name": "gfx4snes", "path": "devkitsnes/tools/gfx4snes", "purpose": "PNG to SNES tile/palette/map converter"},
+          {"name": "gfx2snes", "path": "devkitsnes/tools/gfx2snes", "purpose": "Legacy graphics converter"},
+          {"name": "816-opt", "path": "devkitsnes/tools/816-opt", "purpose": "ASM optimizer"},
+          {"name": "constify", "path": "devkitsnes/tools/constify", "purpose": "C constant to ROM mover"},
+          {"name": "snestools", "path": "devkitsnes/tools/snestools", "purpose": "ROM header/checksum tool"},
+          {"name": "smconv", "path": "devkitsnes/tools/smconv", "purpose": "Sound module converter"},
+          {"name": "snesbrr", "path": "devkitsnes/tools/snesbrr", "purpose": "WAV to BRR audio converter"},
+          {"name": "bin2txt", "path": "devkitsnes/tools/bin2txt", "purpose": "Binary to text converter"},
+          {"name": "tmx2snes", "path": "devkitsnes/tools/tmx2snes", "purpose": "Tiled JSON map converter"}
+        ],
+        "buildSystem": [
+          {"name": "snes_rules", "path": "devkitsnes/snes_rules", "purpose": "Makefile include with compile/link rules"}
+        ],
+        "headers": [
+          {"path": "devkitsnes/include/", "purpose": "C standard library headers (stdio.h, stdlib.h, etc.)"},
+          {"path": "pvsneslib/include/snes/", "purpose": "SNES API headers (background.h, dma.h, video.h, etc.)"}
+        ],
+        "libraries": [
+          {"path": "pvsneslib/lib/LoROM_SlowROM/", "purpose": "Default LoROM library objects"},
+          {"path": "pvsneslib/lib/LoROM_FastROM/", "purpose": "FastROM library objects"},
+          {"path": "pvsneslib/lib/HiROM_SlowROM/", "purpose": "HiROM library objects"},
+          {"path": "pvsneslib/lib/HiROM_FastROM/", "purpose": "HiROM FastROM library objects"}
+        ]
+      }
+    },
+    "python3": {
+      "name": "Python 3",
+      "required": true,
+      "version": "3.8+",
+      "description": "Required for font generation (Pillow) and helper scripts",
+      "systemPrerequisite": true,
+      "installNote": "Python is a system prerequisite. The install script checks for it but does not install it automatically.",
+      "platforms": {
+        "windows": {
+          "checkCommand": "python --version",
+          "installInstructions": "Download from https://www.python.org/downloads/ or run: winget install Python.Python.3.12"
+        },
+        "linux": {
+          "checkCommand": "python3 --version",
+          "installInstructions": "sudo apt install python3 python3-pip (Debian/Ubuntu) or sudo dnf install python3 python3-pip (Fedora)"
+        },
+        "darwin": {
+          "checkCommand": "python3 --version",
+          "installInstructions": "brew install python3"
+        }
+      },
+      "pipPackages": [
+        {
+          "name": "Pillow",
+          "version": ">=10.0.0",
+          "description": "Image manipulation library for font PNG generation",
+          "installCommand": "pip install Pillow"
+        }
+      ]
+    },
+    "make": {
+      "name": "GNU Make",
+      "required": true,
+      "version": "4.0+",
+      "description": "Build automation tool required by PVSnesLib's snes_rules",
+      "systemPrerequisite": true,
+      "platforms": {
+        "windows": {
+          "checkCommand": "make --version",
+          "installInstructions": "Option 1: Install MSYS2 (https://www.msys2.org/) then run: pacman -S make\nOption 2: choco install make\nOption 3: Use make from Git for Windows (C:\\Program Files\\Git\\usr\\bin\\make.exe)"
+        },
+        "linux": {
+          "checkCommand": "make --version",
+          "installInstructions": "sudo apt install build-essential (Debian/Ubuntu) or sudo dnf groupinstall 'Development Tools' (Fedora)"
+        },
+        "darwin": {
+          "checkCommand": "make --version",
+          "installInstructions": "xcode-select --install"
+        }
+      }
+    },
+    "git": {
+      "name": "Git",
+      "required": true,
+      "version": "2.0+",
+      "description": "Version control system",
+      "systemPrerequisite": true,
+      "platforms": {
+        "windows": {
+          "checkCommand": "git --version",
+          "installInstructions": "Download from https://git-scm.com/download/win or run: winget install Git.Git"
+        },
+        "linux": {
+          "checkCommand": "git --version",
+          "installInstructions": "sudo apt install git"
+        },
+        "darwin": {
+          "checkCommand": "git --version",
+          "installInstructions": "brew install git"
+        }
+      }
+    },
+    "mesen2": {
+      "name": "Mesen2 Emulator",
+      "required": false,
+      "version": "latest",
+      "description": "Primary development emulator with integrated debugger, memory viewer, VRAM viewer, and trace logging",
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/SourMesen/Mesen2",
+      "platforms": {
+        "windows": {
+          "url": "https://github.com/SourMesen/Mesen2/releases",
+          "note": "Download latest Windows release. Extract to tools/emulators/mesen2/"
+        },
+        "linux": {
+          "url": "https://github.com/SourMesen/Mesen2/releases",
+          "note": "Download latest Linux AppImage. Place in tools/emulators/mesen2/"
+        }
+      },
+      "extractTo": "tools/emulators/mesen2",
+      "installNote": "Optional. Download manually from GitHub releases page."
+    },
+    "bsnes": {
+      "name": "bsnes Emulator",
+      "required": false,
+      "version": "latest",
+      "description": "Cycle-accurate SNES emulator for final compatibility testing. If it works in bsnes, it works on real hardware.",
+      "license": "GPL-3.0",
+      "homepage": "https://github.com/bsnes-emu/bsnes",
+      "platforms": {
+        "windows": {
+          "url": "https://github.com/bsnes-emu/bsnes/releases",
+          "note": "Download latest Windows release. Extract to tools/emulators/bsnes/"
+        }
+      },
+      "extractTo": "tools/emulators/bsnes",
+      "installNote": "Optional. Download manually from GitHub releases page."
+    }
+  },
+  "gfx4snesUsage": {
+    "description": "Quick reference for gfx4snes PNG-to-SNES conversion (used in Phases 5 and 6)",
+    "binaryPath": "{PVSNESLIB_HOME}/devkitsnes/tools/gfx4snes",
+    "commonOptions": {
+      "-i <file>": "Input PNG file",
+      "-p": "Generate palette file (.pal)",
+      "-t": "Generate tile/character data (.pic)",
+      "-m": "Generate tilemap file (.map)",
+      "-s <size>": "Tile size in pixels (default: 8 for 8x8)",
+      "-b <bpp>": "Bits per pixel: 2 (4 colors), 4 (16 colors), 8 (256 colors)",
+      "-R": "Reduce/optimize tiles (remove duplicates and blank tiles)",
+      "-f": "Enable flip detection (flag horizontally/vertically mirrored tiles)",
+      "-o <name>": "Output base filename",
+      "-e <n>": "Number of palette entries to skip at start (transparency)"
+    },
+    "examples": {
+      "background_16color": "gfx4snes -i background.png -p -t -m -s 8 -b 4 -R -f -o background",
+      "font_16color": "gfx4snes -i font.png -p -t -s 8 -b 4 -e 0 -o font",
+      "background_4color": "gfx4snes -i bg.png -p -t -m -s 8 -b 2 -R -o bg"
+    },
+    "outputFormats": {
+      ".pic": "Raw tile data in SNES planar bitplane format",
+      ".pal": "SNES 15-bit BGR palette (format: 0bbbbbgggggrrrrr per 2-byte entry)",
+      ".map": "Tilemap entries (16-bit: VHOppptttttttttt — V=vflip, H=hflip, O=priority, ppp=palette, t=tile index)"
+    }
+  }
+}

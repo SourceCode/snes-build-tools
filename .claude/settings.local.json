@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Bash(dir:*)",
+      "Bash(gh api:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:snes.nesdev.org)",
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "Bash(test:*)",
+      "Bash(bash install.sh:*)",
+      "Bash(bash:*)",
+      "Bash(where.exe:*)",
+      "Bash(python3:*)",
+      "Bash(for f in projects/hello-snes-world/Makefile projects/hello-snes-world/hdr.asm projects/hello-snes-world/data.asm projects/hello-snes-world/src/main.c scripts/test_build.bat)",
+      "Bash(do test -f \"$f\")",
+      "Bash(echo:*)",
+      "Bash(done)",
+      "Bash(pip install:*)",
+      "Bash(J:/code/snes/snes-build-tools/tools/pvsneslib/devkitsnes/tools/gfx4snes.exe:*)",
+      "Bash(ls:*)",
+      "Bash(where:*)",
+      "Bash(winget search:*)",
+      "Bash(winget install:*)",
+      "Bash(export PATH=\"$PATH:/c/Users/Ryan Rentfro/AppData/Local/Microsoft/WinGet/Links\")",
+      "Bash(make:*)",
+      "Bash(cmd.exe:*)",
+      "Bash(MAKE_PATH=\"/c/Users/Ryan Rentfro/AppData/Local/Microsoft/WinGet/Packages/ezwinports.make_Microsoft.Winget.Source_8wekyb3d8bbwe/bin/make.exe\":*)",
+      "Bash(\"$MAKE_PATH\" --version)",
+      "Bash(export PVSNESLIB_HOME=\"J:/code/snes/snes-build-tools/tools/pvsneslib\")",
+      "Bash(export PATH=\"$PVSNESLIB_HOME/devkitsnes/bin:$PVSNESLIB_HOME/devkitsnes/tools:/c/Users/Ryan Rentfro/AppData/Local/Microsoft/WinGet/Packages/ezwinports.make_Microsoft.Winget.Source_8wekyb3d8bbwe/bin:$PATH\")",
+      "Bash(export PATH=\"$PVSNESLIB_HOME/devkitsnes/bin:$PVSNESLIB_HOME/devkitsnes/tools:$PATH\")",
+      "Bash(snestools:*)",
+      "Bash(\"$PVSNESLIB_HOME/devkitsnes/tools/snestools\" \"J:/code/snes/snes-build-tools/projects/hello-snes-world/hello_snes_world.sfc\")",
+      "Bash(winget list:*)",
+      "Bash(scoop list:*)"
+    ]
+  }
+}
